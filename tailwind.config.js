@@ -9,7 +9,7 @@ export default {
       colors: {
         primary: {
           DEFAULT: "#5A062F", // Deep Wine Maroon
-          dark: "#3D031F", // Even deeper maroon
+          dark: "#5A062F", // Deep Maroon/Wine
           light: "#821048", // Lighter brand maroon
         },
         secondary: "#5A062F", // Deep Maroon/Wine (Typography)
