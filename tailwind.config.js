@@ -12,7 +12,7 @@ export default {
           dark: "#3D031F", // Even deeper maroon
           light: "#821048", // Lighter brand maroon
         },
-        secondary: "#2E0216", // Deep Maroon-Black (Typography)
+        secondary: "#5A062F", // Deep Maroon/Wine (Typography)
         accent: {
           DEFAULT: "#C5A85A", // Soft Gold
           light: "#F5EFEB", // Cream/Gold wash
