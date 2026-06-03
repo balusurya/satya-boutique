@@ -239,7 +239,7 @@ const Testimonials = () => {
             {/* Google review action */}
             <div className="text-center">
               <a 
-                href="https://google.com" 
+                href="https://g.page/r/CeYcAAacUhwGEBM/review" 
                 target="_blank" 
                 className="px-6 py-2.5 bg-accent hover:bg-accent-dark text-white text-xs tracking-widest uppercase font-semibold font-sans rounded-lg shadow-md transition-colors"
               >
