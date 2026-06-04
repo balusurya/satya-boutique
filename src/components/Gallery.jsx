@@ -44,7 +44,7 @@ const Gallery = () => {
       title: "Designer Embroidered Back",
       category: "BLOUSE",
       subcats: ["LADIES"],
-      image: "https://images.unsplash.com/photo-1610030469668-93535c17b6b3?w=600&auto=format&fit=crop&q=80",
+      image: "/embroidered_back.png",
       desc: "Bespoke cutout back pattern with maggam and thread work."
     },
     {
