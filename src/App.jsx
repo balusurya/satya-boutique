@@ -5,7 +5,7 @@ import Services from './components/Services';
 import Gallery from './components/Gallery';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import { Phone, MessageSquare, Menu, X, Calendar, Ruler, CheckCircle, Info } from 'lucide-react';
+import { Phone, MessageSquare, Menu, X, Calendar, Ruler, CheckCircle, Info, Star } from 'lucide-react';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,6 +34,8 @@ function App() {
     length: ''
   });
 
+  const [reviewPopupOpen, setReviewPopupOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -41,6 +43,21 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const isDismissed = localStorage.getItem('googleReviewPopupDismissed');
+    if (!isDismissed) {
+      const timer = setTimeout(() => {
+        setReviewPopupOpen(true);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleDismissReviewPopup = () => {
+    localStorage.setItem('googleReviewPopupDismissed', 'true');
+    setReviewPopupOpen(false);
+  };
 
   // SUGGESTION 1: SCROLLSPY INTERSECTION OBSERVER SETUP
   useEffect(() => {
@@ -563,6 +580,71 @@ function App() {
                 </p>
               </div>
 
+            </div>
+          </div>
+        </div>
+      )}
+      {/* GOOGLE REVIEW POPUP MODAL */}
+      {reviewPopupOpen && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+          <div className="absolute inset-0" onClick={handleDismissReviewPopup}></div>
+          
+          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-md w-full relative z-10 border-2 border-accent transform transition-all duration-300 scale-100 p-6 md:p-8">
+            <button 
+              onClick={handleDismissReviewPopup}
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-250 text-secondary flex items-center justify-center transition-colors focus:outline-none"
+              aria-label="Close review request popup"
+              id="close-review-popup"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="text-center space-y-4">
+              {/* Google Brand Header */}
+              <div className="inline-flex items-center space-x-1.5 bg-gray-50 border border-gray-100 px-4 py-1.5 rounded-full shadow-sm">
+                <span className="text-base font-sans font-bold tracking-tight">
+                  <span className="text-blue-500">G</span>
+                  <span className="text-red-500">o</span>
+                  <span className="text-yellow-500">o</span>
+                  <span className="text-blue-500">g</span>
+                  <span className="text-green-500">l</span>
+                  <span className="text-red-500">e</span>
+                </span>
+                <span className="text-xs uppercase tracking-widest text-secondary font-sans font-semibold">Review</span>
+              </div>
+
+              <h3 className="font-serif text-2xl font-bold text-primary">
+                Help Us Grow!
+              </h3>
+              
+              <div className="flex justify-center space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-7 h-7 fill-accent text-accent animate-pulse" />
+                ))}
+              </div>
+
+              <p className="text-gray-600 font-sans text-sm leading-relaxed">
+                Thank you for choosing Satya Boutique! We love hearing from our clients. If you are satisfied with our custom tailoring, please share your feedback on Google.
+              </p>
+
+              <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  onClick={handleDismissReviewPopup}
+                  className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-secondary rounded-xl text-xs font-semibold tracking-widest uppercase transition-colors"
+                >
+                  Maybe Later
+                </button>
+                <a
+                  href="https://g.page/r/CeYcAAacUhwGEBM/review"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleDismissReviewPopup}
+                  className="w-full sm:w-auto px-6 py-3 bg-accent hover:bg-accent-dark text-white rounded-xl text-xs font-semibold tracking-widest uppercase shadow-lg transition-colors flex items-center justify-center space-x-2"
+                  id="write-google-review-btn"
+                >
+                  <span>Write a Review</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
